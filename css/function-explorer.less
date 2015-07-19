@@ -1,61 +1,86 @@
 #main {
-  width: 80%;
-  height: 400px;
-  margin: 10px auto;
   background-color: #060a1b;
+  height: 100%;
+  padding: 20px 0;
+  color: #AAA;
   
-  #graph-canvas {
+  .alert {
+    display: none;
+  }
+  
+  #graph-wrapper {
     width: 80%;
-    height: 100%;
-    float: left;
-  }
-  
-  #graph-options {
-    float: right;
-    width: 19%;
-    height: 100%;
-    max-height: 100%;
-    overflow: auto;
-    border-left: 4px dashed #666;
+    height: 400px;
+    margin: 0 auto;
     padding-top: 20px;
-    
-    svg.stats-canvas {
-      .point-stat {
-        >text {
-          fill: #FFF;
-        }
-      }
-    }
-    
-    .btn-row {
-      margin-top: 20px;
-      
-      .col-md-12 {
-        padding: 5px 0;
-        button {
-          width: 100%;
-        }
-      }
-    }
-  }
-  
-  path { 
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-  }
+    border: 4px dashed #666;
+    border-radius: 4px;
 
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
-  }
-  
-  .axis .tick {
-    fill: grey;
-  }
-  
-  
-}
+    #graph-canvas {
+      width: 80%;
+      height: 100%;
+      float: left;
+    }
+
+    #graph-options {
+      float: right;
+      width: 19%;
+      height: 100%;
+      max-height: 100%;
+      overflow: auto;
+      border-left: 4px dashed #666;
+      padding-top: 20px;
+
+      svg.stats-canvas {
+        .point-stat {
+          >text {
+            fill: #FFF;
+          }
+        }
+      }
+
+      .input-row {
+        div.input-group {
+          margin: 5px 0;
+          
+          span#clear-lines-addon {
+            background: transparent;
+            border: none;
+            padding-left: 0;
+            color: #AAA;
+          }
+        }
+      }
+      
+      .btn-row {
+        margin-top: 20px;
+        padding: 0 15px;
+        
+        .col-md-12 {
+          padding: 5px 0;
+          button {
+            width: 100%;
+            display: none;
+          }
+        }
+      }
+    }
+
+    path { 
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: grey;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+    }
+
+    .axis .tick {
+      fill: grey;
+    }
+  } /* End graph-wrapper */
+} /* End main */

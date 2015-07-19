@@ -1,7 +1,8 @@
 var API = (function(d3) {
   
   return {
-    intervalTime: 200,
+    intervalTime: 50,
+    deltaX: 0.1,
     selector: null,
     statsSelector: null,
     // Graphs margins
@@ -25,6 +26,13 @@ var API = (function(d3) {
     data: [{x: 0, y: 0}],
     // Holds the current line ID
     lineId: null,
+    // Array of line colors to cycle through
+    lineColorIdx: 0,
+    lineColors: [
+      '#4682B4',
+      '#f42704',
+      '#822db1'
+    ],
 
     initGraph: function(selector) {
       var self = this;
@@ -84,9 +92,24 @@ var API = (function(d3) {
         .on("mouseup.drag",   self.mouseup())
         .on("touchend.drag",  self.mouseup());*/
       $(function() {
-        $('#run-btn').click(self.saveSettings.bind(self));
-        $('#stop-btn').click(self.stop.bind(self));
-        $('#resume-btn').click(self.resume.bind(self));
+        self.buttons = {
+          run: $('#run-btn'),
+          stop: $('#stop-btn'),
+          resume: $('#resume-btn'),
+          clearLines: $('#clear-lines-btn')
+        };
+        
+        self.alerts = {
+          warning: $('.alert-warning')
+        };
+        
+        self.buttons.run.click(self.saveSettings.bind(self));
+        self.buttons.stop.click(self.stop.bind(self));
+        self.buttons.resume.click(self.resume.bind(self));
+        self.buttons.clearLines.click(self.clearLines.bind(self));
+        self.buttons.run.fadeIn();
+        
+        $('#deltax-input').val(self.deltaX);
       });
     },
     
@@ -95,7 +118,23 @@ var API = (function(d3) {
       this.svg.append("path")
         .attr("id", this.lineId)
         .attr("class", "line")
+        .style("stroke", this.getNextLineColor())
         .attr("d", this.valueline(this.data));  
+    },
+    
+    getNextLineColor: function() {
+      var color = this.lineColors[this.lineColorIdx];
+      this.lineColorIdx = 
+        this.lineColorIdx === (this.lineColors.length - 1) ?
+        0 
+        :
+        this.lineColorIdx + 1;
+
+      return color;
+    },
+    
+    clearLines: function() {
+      this.svg.selectAll('.line').remove();  
     },
     
     initStats: function(statsSelector) {
@@ -135,17 +174,17 @@ var API = (function(d3) {
       var extentY = d3.extent(self.data, function(d) {
         return d.y;
       });
-      
-      //this.x = d3.scale.linear().domain(extentX);
-      //this.y = d3.scale.linear().range(extentY);
 
       // Scale the range of the data
-      var headingX = (extentX[1] - extentX[0]);
-      var headingY = (extentY[1] - extentY[0]);
+      var gapX = (extentX[1] - extentX[0]);
+      var gapY = (extentY[1] - extentY[0]);
     console.log("Current ext: "); console.log(extentX); console.log(extentY);
       
-      this.x.domain([extentX[0], extentX[1] + headingX]);
-      this.y.domain(extentY);
+      this.x.domain([extentX[0], extentX[1] + gapX]);
+      
+      var minY = extentY[0] - gapY;
+      var maxY = extentY[1] + gapY;
+      this.y.domain([minY, maxY]);
 
       // Select the section we want to apply our changes to
       var svg = d3.select(this.selector);
@@ -165,14 +204,34 @@ var API = (function(d3) {
         this.funcString = funcString;
       }
       
+      this.deltaX = parseFloat($('#deltax-input').val());
+      if(isNaN(this.deltaX)) {
+        this.deltaX = 1;
+        $('#deltax-input').val(this.deltaX);
+      }
+      
       this.data = [{x: 0, y: 0}];
       this.run();
     },
     
+    clearLinesBeforeRun: function() {
+      return $('#clear-lines-input').is(':checked');  
+    },
+    
     run: function() {
+      if(this.clearLinesBeforeRun()) {
+        this.clearLines();
+      }
+      
+      this.newValueLine();
+      this.clearMessages();
       this.stop();
       this.reset();
       this.interval = setInterval(this.loop.bind(this), this.intervalTime);
+      this.buttons.run.hide();
+      this.buttons.resume.hide();
+      this.buttons.clearLines.hide();
+      this.buttons.stop.fadeIn();
     },
     
     reset: function() {
@@ -180,16 +239,31 @@ var API = (function(d3) {
       this.currX = 0;
     },
     
+    resetUI: function() {
+      this.buttons.stop.hide();
+      this.buttons.resume.hide();
+      this.buttons.run.fadeIn();
+    },
+    
     loop: function() {
       var self = this;
+
       var func = function(x) {
         return math.eval(self.funcString, {x: x})
       };
       
-      var nextPoint = {
-        x: ++self.currX,
-        y: func(self.currX)
-      };
+      self.currX += self.deltaX;
+      try {
+        var nextPoint = {
+          x: self.currX,
+          y: func(self.currX)
+        };
+      } catch(e) {
+        self.stop();
+        self.warning("Invalid function: " + e.message);
+        self.resetUI();
+        return;
+      }
 
       if(!isFinite(nextPoint.y)) {
         self.data = [];
@@ -207,10 +281,32 @@ var API = (function(d3) {
     
     stop: function() {
       clearInterval(this.interval);
+      this.buttons.stop.hide();
+      this.buttons.run.fadeIn();
+      this.buttons.resume.fadeIn();
+      this.buttons.clearLines.fadeIn();
     },
     
     resume: function() {
       this.interval = setInterval(this.loop.bind(this), this.intervalTime);
+      this.buttons.run.hide();
+      this.buttons.resume.hide();
+      this.buttons.stop.fadeIn();
+    },
+    
+    warning: function(msg) {
+      this.alerts.warning.html(msg).fadeIn();
+    },
+    
+    clearMessages: function() {
+      for(alertType in this.alerts) {
+        if(!this.alerts.hasOwnProperty(alertType)) {
+          continue;
+        }
+        this.alerts[alertType]
+          .hide()
+          .html('');
+      }
     }
     
   };

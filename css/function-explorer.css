@@ -1,15 +1,27 @@
 #main {
+  background-color: #060a1b;
+  height: 100%;
+  padding: 20px 0;
+  color: #AAA;
+  /* End graph-wrapper */
+}
+#main .alert {
+  display: none;
+}
+#main #graph-wrapper {
   width: 80%;
   height: 400px;
-  margin: 10px auto;
-  background-color: #060a1b;
+  margin: 0 auto;
+  padding-top: 20px;
+  border: 4px dashed #666;
+  border-radius: 4px;
 }
-#main #graph-canvas {
+#main #graph-wrapper #graph-canvas {
   width: 80%;
   height: 100%;
   float: left;
 }
-#main #graph-options {
+#main #graph-wrapper #graph-options {
   float: right;
   width: 19%;
   height: 100%;
@@ -18,30 +30,41 @@
   border-left: 4px dashed #666;
   padding-top: 20px;
 }
-#main #graph-options svg.stats-canvas .point-stat > text {
+#main #graph-wrapper #graph-options svg.stats-canvas .point-stat > text {
   fill: #FFF;
 }
-#main #graph-options .btn-row {
-  margin-top: 20px;
+#main #graph-wrapper #graph-options .input-row div.input-group {
+  margin: 5px 0;
 }
-#main #graph-options .btn-row .col-md-12 {
+#main #graph-wrapper #graph-options .input-row div.input-group span#clear-lines-addon {
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  color: #AAA;
+}
+#main #graph-wrapper #graph-options .btn-row {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+#main #graph-wrapper #graph-options .btn-row .col-md-12 {
   padding: 5px 0;
 }
-#main #graph-options .btn-row .col-md-12 button {
+#main #graph-wrapper #graph-options .btn-row .col-md-12 button {
   width: 100%;
+  display: none;
 }
-#main path {
-  stroke: steelblue;
+#main #graph-wrapper path {
   stroke-width: 2;
   fill: none;
 }
-#main .axis path,
-#main .axis line {
+#main #graph-wrapper .axis path,
+#main #graph-wrapper .axis line {
   fill: none;
   stroke: grey;
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
-#main .axis .tick {
+#main #graph-wrapper .axis .tick {
   fill: grey;
 }
+/* End main */

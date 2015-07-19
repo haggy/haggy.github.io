@@ -5,25 +5,39 @@
     </head>
     <body>
         <div id="main">
-          <div id="graph-canvas"></div>
-          <div id="graph-options" class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="input-group">
-                  <span id="function-addon" class="input-group-addon">&sum;</span>
-                  <input id="function-input" type="text" class="form-control" placeholder="Function" aria-describedby="function-addon">
+          <div class="alert alert-warning" role="alert"></div>
+          <div id="graph-wrapper">
+            <div id="graph-canvas"></div>
+            <div id="graph-options" class="container">
+              <div class="row input-row">
+                <div class="col-md-12">
+                  <div class="input-group">
+                    <span id="function-addon" class="input-group-addon">&sum;</span>
+                    <input id="function-input" type="text" class="form-control" placeholder="Function" aria-describedby="function-addon">
+                  </div>
+                  <div class="input-group">
+                    <span id="deltax-addon" class="input-group-addon">&Delta;x</span>
+                    <input id="deltax-input" type="text" class="form-control" placeholder="Delta X" aria-describedby="deltax-addon">
+                  </div>
+                  <div class="input-group">
+                    <span id="clear-lines-addon" class="input-group-addon">Clear lines before run</span>
+                    <input id="clear-lines-input" type="checkbox" class="form-control" aria-describedby="clear-lines-addon" checked>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row btn-row">
-              <div class="col-md-12">
-                <button id="run-btn" type="button" class="btn btn-success">Run it!</button>
-              </div>
-              <div class="col-md-12">
-                <button id="stop-btn" type="button" class="btn btn-danger">Stop it!</button>
-              </div>
-              <div class="col-md-12">
-                <button id="resume-btn" type="button" class="btn btn-info">Resume it!</button>
+              <div class="row btn-row">
+                <div class="col-md-12">
+                  <button id="run-btn" type="button" class="btn btn-success">Run it!</button>
+                </div>
+                <div class="col-md-12">
+                  <button id="stop-btn" type="button" class="btn btn-danger">Stop it!</button>
+                </div>
+                <div class="col-md-12">
+                  <button id="resume-btn" type="button" class="btn btn-info">Resume it!</button>
+                </div>
+                <div class="col-md-12">
+                  <button id="clear-lines-btn" type="button" class="btn">Clear Lines</button>
+                </div>
               </div>
             </div>
           </div>
