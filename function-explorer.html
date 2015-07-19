@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css">
+        <link rel="stylesheet" href="css/slider.css">
         <link rel="stylesheet" href="css/function-explorer.css">
     </head>
     <body>
@@ -18,6 +19,16 @@
                   <div class="input-group">
                     <span id="deltax-addon" class="input-group-addon">&Delta;x</span>
                     <input id="deltax-input" type="text" class="form-control" placeholder="Delta X" aria-describedby="deltax-addon">
+                  </div>
+                  <div class="input-group">
+                    <span id="deltax-addon" class="input-group-addon">Speed</span>
+                    <input type="text" class="span2" value="" 
+                        data-slider-min="1" 
+                        data-slider-max="100" 
+                        data-slider-step="1" 
+                        data-slider-value="1" 
+                        data-slider-orientation="horizontal" 
+                        data-slider-selection="after">
                   </div>
                   <div class="input-group">
                     <span id="clear-lines-addon" class="input-group-addon">Clear lines before run</span>
@@ -45,6 +56,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/mathjs/1.7.0/math.min.js"></script>
+        <script src="js/slider.js"></script>
         <script src="js/function-explorer.js"></script>
     </body>
 </html>

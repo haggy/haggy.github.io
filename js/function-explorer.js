@@ -33,6 +33,8 @@ var API = (function(d3) {
       '#f42704',
       '#822db1'
     ],
+    // Reference to the speed slider component
+    speedSlider: null,
 
     initGraph: function(selector) {
       var self = this;
@@ -111,6 +113,17 @@ var API = (function(d3) {
         
         $('#deltax-input').val(self.deltaX);
       });
+    },
+
+    initSlider: function() {
+      this.speedSlider = $('#speed-slider')
+        .slider()
+        .on('slideStop', this.onSpeedSliderSelect.bind(this))
+        .data('slider');
+    },
+
+    onSpeedSliderSelect: function() {
+      this.intervalTime = this.speedSlider.getValue() * 10;
     },
     
     newValueLine: function() {
