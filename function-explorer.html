@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/function-explorer.css">
+    </head>
+    <body>
+        <div id="main">
+          <div id="graph-canvas"></div>
+          <div id="graph-options" class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span id="function-addon" class="input-group-addon">&sum;</span>
+                  <input id="function-input" type="text" class="form-control" placeholder="Function" aria-describedby="function-addon">
+                </div>
+              </div>
+            </div>
+            <div class="row btn-row">
+              <div class="col-md-12">
+                <button id="run-btn" type="button" class="btn btn-success">Run it!</button>
+              </div>
+              <div class="col-md-12">
+                <button id="stop-btn" type="button" class="btn btn-danger">Stop it!</button>
+              </div>
+              <div class="col-md-12">
+                <button id="resume-btn" type="button" class="btn btn-info">Resume it!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/mathjs/1.7.0/math.min.js"></script>
+        <script src="js/function-explorer.js"></script>
+    </body>
+</html>

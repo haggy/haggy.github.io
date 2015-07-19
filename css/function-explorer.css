@@ -1,0 +1,47 @@
+#main {
+  width: 80%;
+  height: 400px;
+  margin: 10px auto;
+  background-color: #060a1b;
+}
+#main #graph-canvas {
+  width: 80%;
+  height: 100%;
+  float: left;
+}
+#main #graph-options {
+  float: right;
+  width: 19%;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  border-left: 4px dashed #666;
+  padding-top: 20px;
+}
+#main #graph-options svg.stats-canvas .point-stat > text {
+  fill: #FFF;
+}
+#main #graph-options .btn-row {
+  margin-top: 20px;
+}
+#main #graph-options .btn-row .col-md-12 {
+  padding: 5px 0;
+}
+#main #graph-options .btn-row .col-md-12 button {
+  width: 100%;
+}
+#main path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+#main .axis path,
+#main .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+#main .axis .tick {
+  fill: grey;
+}
