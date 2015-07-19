@@ -42,6 +42,10 @@
   padding-left: 0;
   color: #AAA;
 }
+#main #graph-wrapper #graph-options .input-row div.input-group div.slider {
+  margin-left: 10%;
+  margin-top: 4px;
+}
 #main #graph-wrapper #graph-options .btn-row {
   margin-top: 20px;
   padding: 0 15px;
