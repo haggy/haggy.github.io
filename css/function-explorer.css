@@ -47,6 +47,9 @@
 #main #graph-wrapper #graph-options .input-row div.input-group {
   margin: 5px 0;
 }
+#main #graph-wrapper #graph-options .input-row div.input-group.slider-group {
+  margin-top: 20px;
+}
 #main #graph-wrapper #graph-options .input-row div.input-group span#clear-lines-addon {
   background: transparent;
   border: none;
