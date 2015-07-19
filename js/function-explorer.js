@@ -113,7 +113,7 @@ var API = (function(d3) {
         
         $('#deltax-input').val(self.deltaX);
 
-        this.initSlider();
+        self.initSlider();
       });
     },
 
