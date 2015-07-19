@@ -5,6 +5,18 @@
   color: #AAA;
   /* End graph-wrapper */
 }
+#main > .jumbotron {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 4px;
+  background: transparent;
+}
+#main > .jumbotron ul pre {
+  width: 10%;
+  background-color: transparent;
+  color: #AAA;
+}
 #main .alert {
   display: none;
 }
