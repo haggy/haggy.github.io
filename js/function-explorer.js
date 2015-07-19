@@ -112,6 +112,8 @@ var API = (function(d3) {
         self.buttons.run.fadeIn();
         
         $('#deltax-input').val(self.deltaX);
+
+        this.initSlider();
       });
     },
 
